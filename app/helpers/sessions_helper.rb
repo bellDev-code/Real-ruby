@@ -14,10 +14,10 @@ module SessionsHelper
 
   # 현재 로그인 중인 유저를 리턴한다.
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
-    elsif cookies.signed[:user_id]
-      user = User.find_by(id: cookies.signed[:user_id])
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
