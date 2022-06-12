@@ -1,26 +1,30 @@
 <!-- Header Partial -->
-<header class="navbar navbar-dark bg-dark">
+<header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "sample app", "#", id: "logo" %>
+    <%= link_to "sample app", root_path, id: "logo" %>
     <nav>
-      <ul class="nav justify-content-end">
-        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
-          <li class="nav-item"><%= link_to "Users", '#', class: "nav-link" %></li>
-          <li class="nav-item dropdown">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+          <li><%= link_to "Users", '#' %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li class="dropdown-item"><%= link_to "Profile", current_user %></li>
-              <li class="dropdown-item"><%= link_to "Settings", '#' %></li>
-              <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to "Log out", logout_path, method: :delete %></li>
+              <li><%= link_to "Profile", current_user %></li>
+              <!-- 추가하는 코드 -->
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <!-- 추가하는 코드 -->
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to "Log in", login_path, class: "nav-link"%></li>
+          <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
     </nav>

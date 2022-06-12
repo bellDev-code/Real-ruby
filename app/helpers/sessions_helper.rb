@@ -12,7 +12,12 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  # 현재 로그인 중인 유저를 리턴한다.
+  # 입력받은 유저가 로그인해있다면 true를 리턴한다.
+  def current_user?(user)
+    user == current_user
+  end
+
+  # remember token cookie에 대응하는 유저를 리턴한다.
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
